@@ -2,7 +2,27 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('motorcycleForm');
     const reviewList = document.getElementById('reviewList');
     const filterRating = document.getElementById('filterRating');
-    let reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+
+    // Initializing reviews with hardcoded data
+    let reviews = [
+        {
+            model: 'X1000',
+            brand: 'Yamaha',
+            year: 2020,
+            type: 'Sport',
+            review: 'Excellent performance and handling.',
+            rating: 5
+        },
+        {
+            model: 'C500',
+            brand: 'Honda',
+            year: 2018,
+            type: 'Cruiser',
+            review: 'Comfortable ride with a classic look.',
+            rating: 4
+        }
+    ];
+
     let editIndex = -1;
 
     const saveReviews = () => {
@@ -15,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
         reviewList.innerHTML = '';
         const filterRating = document.getElementById('filterRating');
         const filteredReviews = filterRating.value === 'all' ? reviews : reviews.filter(review => review.rating == filterRating.value);
-    
+
         if (filteredReviews.length === 0) {
             const noRecordMessage = document.createElement('p');
             noRecordMessage.textContent = 'No record found';
@@ -76,7 +96,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         editIndex = index;
 
-        // Scroll to the top of the form and focus
         form.scrollIntoView({ behavior: 'smooth' });
         form.model.focus();
     };
